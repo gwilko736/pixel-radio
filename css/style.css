@@ -1,0 +1,80 @@
+.radio {
+    background: url(../assets/img/radio-player.png) no-repeat;
+    background-size: calc(288 * var(--u)) calc(360 * var(--u));
+    --scale: 4;
+    --u: calc(var(--scale)*1px);
+    --col: 0;
+    --row: 0;
+    position: relative;
+    width: calc(96*var(--u));
+    height: calc(72*var(--u));
+  background-position:
+    calc(var(--col) * -96 * var(--u))
+    calc(var(--row) * -72 * var(--u));
+image-rendering: pixelated;
+}
+
+.hotspot {
+    position: absolute;
+    left: calc(var(--x) * var(--u));
+    top: calc(var(--y) * var(--u));
+    width: calc(var(--w) * var(--u));
+    height: calc(var(--h) * var(--u));
+    background: transparent;
+    border: 0;
+}
+
+.hotspot--power {
+--x: 69;
+--y: 21;
+--w: 5;
+--h: 5;
+}
+
+
+.hotspot--change.track {
+--x: 51;
+--y: 48;
+--w: 9;
+--h: 9;
+}
+
+
+.hotspot--play {
+--x: 64;
+--y: 48;
+--w: 9;
+--h: 9;
+}
+
+
+.display {
+position: absolute;
+left: calc(var(--x) * var(--u));
+top: calc(var(--y) * var(--u));
+width: calc(var(--w) * var(--u));
+height: calc(var(--h) * var(--u));
+overflow: hidden;
+--x:53;
+--y:33.5;
+--w:18;
+--h:4;
+}
+
+.display__text {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: 10px;
+    font-family: "Pixelify Sans", monospace;
+    animation: scroll-text 8s linear infinite;
+}
+
+@keyframes scroll-text {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
