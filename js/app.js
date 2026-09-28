@@ -3,7 +3,7 @@ const displayText = document.querySelector(".display__text");
 const audio = new Audio();
 audio.volume = 0.7;
 
-const playlist = [
+let playlist = [
     {
         title: "A cup of tea",
         artist: "TAD",
@@ -240,4 +240,48 @@ if (event.offsetX < midpoint) {
         playSequence("music");
     });
 }
+});
+
+async function chooseAndLoadFolder() {
+    const tracks = await window.musicLibrary.chooseFolder();
+
+    if (tracks.length === 0) {
+        return;
+    }
+
+    playlist = tracks;
+    trackIndex = 0;
+    loadTrack();
+
+    if (currentState !== "music") {
+        displayText.textContent = "";
+    }
+}
+
+window.musicLibrary.onChangeMusicFolder(chooseAndLoadFolder);
+
+async function restoreSavedTracks() {
+    let tracks = await window.musicLibrary.loadSavedTracks();
+
+    if (tracks.length === 0) {
+        tracks = await window.musicLibrary.chooseFolder();
+    }
+
+    if (tracks.length === 0) {
+        return;
+    }
+
+    playlist = tracks;
+    trackIndex = 0;
+    loadTrack();
+
+    if (currentState !== "music") {
+        displayText.textContent = "";
+    }
+}
+
+restoreSavedTracks();
+
+window.musicLibrary.onSetVolume((level) => {
+    audio.volume = level;
 });

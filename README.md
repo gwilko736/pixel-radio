@@ -9,6 +9,9 @@ A Pixel radio art widget/player that plays a set playlist of local Mp3 files.
 - Next and previous track controls
 - Automatic playlist looping
 - Scrolling track title and artist display
+- Electron desktop support
+- Folder selection and remembering
+- Automatic MP3 discovery
 
 ## Controls
 
@@ -16,26 +19,19 @@ A Pixel radio art widget/player that plays a set playlist of local Mp3 files.
 - Play button (right knob): play or pause the current track
 - Left side of the track button (left knob): previous track
 - Right side of the track button (left knob): next track
+- Right Click: Opens a menu with 'Change Music Folder', volume controls, and an option to close the app
 
-## Running the project
+## Running the desktop app
+No installer is available yet.
 
-Open `index.html` through a local server, such as VS Code Live Server.
+You need Node.js installed.
 
-Audio playback works best in Chrome or another full browser. The VS Code integrated browser may restrict local audio playback.
+From the project folder, install the dependencies and start the app:
 
-## Audio
-
-The MP3 files are stored in:
-
-`assets/audio/`
-
-The playlist is currently defined in `js/app.js`.
-
-Each track should include:
-
-- Title
-- Artist
-- File path
+```powershell
+npm.cmd install
+npm.cmd start
+```
 
 ## How it works
 
@@ -47,7 +43,9 @@ The radio uses a small state machine:
 - `standby`
 - `music`
 
-The MP3 player uses the browser Audio API. When a track ends, the next track starts automatically.
+Electron scans the chosen folder and the webpage plays the returned tracks.
+
+On launch the app prompts for a music folder, remembers the choice, and scans MP3s directly inside that folder. User-selected MP3s get their title from the filename and show “Unknown artist.” If a folder isn't selected a Stock Audio playlist will play instead. You can change the music folder in the right-click menu. 
 
 ## Credits
 
@@ -56,25 +54,27 @@ The MP3 player uses the browser Audio API. When a track ends, the next track sta
 Created by: Grace Wilkinson
 
 ### Audio
-LoFi Compilation [https://opengameart.org/content/lofi-compilation] by TAD [https://opengameart.org/users/tad], [http://creativecommons.org/publicdomain/zero/1.0/] 
-- A cup of tea.mp3 A cup of tea.mp3 3.4 Mb 
-- Cue.mp3 Cue.mp3 3 Mb 
-- Bartender.mp3 Bartender.mp3 5.9 Mb 
-- Cat caffe.mp3 Cat caffe.mp3 2.7 Mb 
-- Rainy Forest.mp3 Rainy Forest.mp3 2.4 Mb 
-- Countryside.mp3 Countryside.mp3 2.2 Mb 
-- Oceanside.mp3 Oceanside.mp3 2.5 Mb 
-- Florist.mp3 Florist.mp3 2.7 Mb 
-- Morning rain.mp3 Morning rain.mp3 1.5 Mb 
+Stock Audio is included and will play when no file is selected.
+
+[LoFi Compilation](https://opengameart.org/content/lofi-compilation) by [TAD]([https://opengameart.org/users/tad), All tracks are licensed under [CC0](http://creativecommons.org/publicdomain/zero/1.0/)
+- A cup of tea.mp3
+- Cue.mp3
+- Bartender.mp3
+- Cat caffe.mp3
+- ChillLofiR.mp3
+- Rainy Forest.mp3
+- Countryside.mp3
+- Oceanside.mp3
+- Florist.mp3
+- Morning rain.mp3
 
 ### Font
 
 Pixelify Sans by [Google Fonts](https://fonts.google.com/specimen/Pixelify+Sans)
 
 ## Future plans
-
-- Package the widget as a desktop Electron app
-- Automatically scan a local music folder
+- Windows Installer
+- Transparent & draggable background
 - Improve track metadata handling
 - Explore integration with Windows Media Player
 
